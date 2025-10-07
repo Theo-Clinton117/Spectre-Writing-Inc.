@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Spectre Writing Inc.</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #000;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ccc;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+        
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .contact-hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.8) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .contact-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .contact-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-info {
+            margin-bottom: 40px;
+        }
+        
+        .contact-info h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-detail i {
+            margin-right: 15px;
+            color: #555;
+        }
+        
+        .contact-form {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        
+        .contact-form h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-form h3 i {
+            margin-right: 10px;
+        }
+        
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-family: inherit;
+        }
+        
+        .contact-form textarea {
+            height: 120px;
+        }
+        
+        .contact-form button {
+            background: black;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+        }
+        
+        .contact-form button:hover {
+            background: #333;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        
+        .modal-icon {
+            font-size: 48px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+        
+        /* Footer */
+        footer {
+            background: black;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-brand {
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-brand span {
+            color: #ccc;
+        }
+        
+        .footer-brand p {
+            color: #999;
+            max-width: 300px;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-social {
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            color: #999;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        
+        .footer-social a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-bottom p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links-bottom {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links-bottom a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .footer-links-bottom a:hover {
+            color: white;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .contact-container {
+                flex-direction: row;
+            }
+            
+            .contact-info {
+                width: 50%;
+                margin-bottom: 0;
+                padding-right: 40px;
+            }
+            
+            .contact-form {
+                width: 50%;
+            }
+            
+            .footer-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .footer-brand {
+                width: 30%;
+                margin-bottom: 0;
+            }
+            
+            .footer-links {
+                width: 60%;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .footer-bottom p {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Spectre <span>Writing Inc.</span></div>
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="contact-hero">
+        <div class="container">
+            <h1>Book a Consultation</h1>
+            <p>Ready to discuss your project? Fill out the form below and we'll get back to you within 24 hours.</p>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Let's Connect</h2>
+                    <p>Whether you're ready to start a project or just have questions about our services, we're here to help.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i data-feather="mail"></i>
+                            <span>spectrewriting879@gmail.com</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i data-feather="phone"></i>
+                            <span>+234 708-150-9669</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i data-feather="map-pin"></i>
+                            <span>Ada-George, Port-Harcourt, Rivers State</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3><i data-feather="book"></i> Book a Consultation</h3>
+                    <form id="consultationForm">
+                        <input type="text" id="name" name="name" placeholder="Your Name" required>
+                        <input type="email" id="email" name="email" placeholder="Your Email" required>
+                        <select id="service" name="service" required>
+                            <option value="">Select a Service</option>
+                            <option value="Book Ghostwriting">Book Ghostwriting</option>
+                            <option value="Thought Leadership">Thought Leadership</option>
+                            <option value="Website Content">Website Content</option>
+                            <option value="Speech Writing">Speech Writing</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <textarea id="message" name="message" placeholder="Tell us about your project" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close">&times;</span>
+            <div class="modal-icon">
+                <i data-feather="check-circle"></i>
+            </div>
+            <h3>Message Sent</h3>
+            <p>One of our agents will reach out to you shortly.</p>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h3>Spectre<span>Writing Inc.</span></h3>
+                    <p>Connecting visionary leaders with elite writers to craft compelling content that moves markets.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Book Ghostwriting</a></li>
+                            <li><a href="#">Thought Leadership</a></li>
+                            <li><a href="#">Website Content</a></li>
+                            <li><a href="#">Speech Writing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="#">Our Process</a></li>
+                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Connect</h4>
+                        <div class="footer-social">
+                            <a href="#"><i data-feather="twitter"></i></a>
+                            <a href="#"><i data-feather="linkedin"></i></a>
+                            <a href="#"><i data-feather="facebook"></i></a>
+                            <a href="#"><i data-feather="instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Spectre Writing Inc. All rights reserved.</p>
+                <div class="footer-links-bottom">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Form submission
+        document.getElementById('consultationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real application, you would send the form data to a server here
+            // For this example, we'll just show the success modal
+            
+            // Reset form
+            this.reset();
+            
+            // Show success modal
+            document.getElementById('successModal').style.display = 'flex';
+        });
+        
+        // Close modal
+        document.querySelector('.modal-close').addEventListener('click', function() {
+            document.getElementById('successModal').style.display = 'none';
+        });
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(e) {
+            if (e.target === document.getElementById('successModal')) {
+                document.getElementById('successModal').style.display = 'none';
+            }
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = 'black';
+                navLinks.style.padding = '20px';
+                navLinks.style.gap = '15px';
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+        
+        // Show desktop menu on larger screens
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.position = 'static';
+                navLinks.style.backgroundColor = 'transparent';
+                navLinks.style.padding = '0';
+                navLinks.style.gap = '0';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

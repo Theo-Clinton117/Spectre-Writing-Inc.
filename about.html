@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Spectre Writing Inc.</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #000;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ccc;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+        
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.8) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .page-header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+        }
+        
+        .breadcrumb li {
+            margin: 0 10px;
+        }
+        
+        .breadcrumb li:not(:last-child)::after {
+            content: '/';
+            margin-left: 10px;
+            color: #ccc;
+        }
+        
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+        
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+        
+        /* About Content */
+        .about-content {
+            padding: 80px 0;
+        }
+        
+        .about-intro {
+            margin-bottom: 60px;
+        }
+        
+        .about-intro h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .about-intro p {
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        
+        .mission-vision {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-bottom: 60px;
+        }
+        
+        .mission, .vision {
+            flex: 1;
+        }
+        
+        .mission h3, .vision h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .mission h3 i, .vision h3 i {
+            margin-right: 10px;
+        }
+        
+        .mission p, .vision p {
+            color: #666;
+            padding-left: 34px;
+        }
+        
+        /* Team Section */
+        .team {
+            padding: 60px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .team-member {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .team-member:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .team-member-img {
+            width: 100%;
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .team-member-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .team-member:hover .team-member-img img {
+            transform: scale(1.05);
+        }
+        
+        .team-member-info {
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .team-member-info h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .team-member-info p {
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .team-member-social {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .team-member-social a {
+            color: #555;
+            transition: color 0.3s ease;
+        }
+        
+        .team-member-social a:hover {
+            color: black;
+        }
+        
+        /* Values Section */
+        .values {
+            padding: 80px 0;
+        }
+        
+        .values-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .value-card {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 8px;
+            background: #f8f9fa;
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover {
+            background: black;
+            color: white;
+        }
+        
+        .value-card:hover p {
+            color: #ccc;
+        }
+        
+        .value-icon {
+            background: black;
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .value-card:hover .value-icon {
+            background: white;
+            color: black;
+        }
+        
+        .value-card h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .value-card p {
+            color: #666;
+            margin-bottom: 0;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: gray;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: black;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background: #eee;
+        }
+        
+        /* Footer */
+        footer {
+            background: black;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-brand {
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-brand span {
+            color: #ccc;
+        }
+        
+        .footer-brand p {
+            color: #999;
+            max-width: 300px;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-social {
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            color: #999;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        
+        .footer-social a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-bottom p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links-bottom {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links-bottom a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .footer-links-bottom a:hover {
+            color: white;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {  
+            .mission-vision {
+                flex-direction: row;
+            }
+            
+            .team-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .values-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .footer-brand {
+                width: 30%;
+                margin-bottom: 0;
+            }
+            
+            .footer-links {
+                width: 60%;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .footer-bottom p {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Spectre <span>Writing Inc.</span></div>
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>About Our Company</h1>
+            <ul class="breadcrumb">
+                <li><a href="index.html">Home</a></li>
+                <li>About</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- About Content -->
+    <section class="about-content">
+        <div class="container">
+            <div class="about-intro">
+                <h2>Our Story</h2>
+                <p>Founded in 2025, Spectre Writing Inc. began as a small collective of professional writers passionate about helping thought leaders share their ideas with the world. What started as a modest operation has grown into the premier ghostwriting agency for executives, entrepreneurs, and innovators.</p>
+                <p>Our journey has been shaped by the incredible clients we've had the privilege to work with - each project teaching us something new about the power of words to transform businesses and lives.</p>
+            </div>
+            
+            <div class="mission-vision">
+                <div class="mission">
+                    <h3><i data-feather="target"></i> Our Mission</h3>
+                    <p>To connect visionary leaders with elite writing talent, creating content that moves markets and establishes lasting authority in their industries.</p>
+                </div>
+                <div class="vision">
+                    <h3><i data-feather="eye"></i> Our Vision</h3>
+                    <p>To become the most trusted name in professional ghostwriting, known for our discretion, quality, and ability to capture the unique voice of each client.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section class="team">
+        <div class="container">
+            <div class="section-header">
+                <h2>Meet Our Leadership</h2>
+                <p>The experienced professionals guiding Spectre Writing Inc.</p>
+            </div>
+            
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-member">
+                    <div class="team-member-img">
+                        <img src="./Images/CEO.JPG" style="width: 100%;" alt="Founder & CEO">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Oyeintonbra Theophilus Oyeindiepreye</h3>
+                        <p>Founder & CEO</p>
+                        <div class="team-member-social">
+                            <a href="#"><i data-feather="linkedin"></i></a>
+                            <a href="#"><i data-feather="twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 2 -->
+                <div class="team-member">
+                    <div class="team-member-img">
+                        <img src="./Images/COO.jpeg" alt="Director of Operations">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Kesibo Sokeipirim</h3>
+                        <p>Chief Operations Officer</p>
+                        <div class="team-member-social">
+                            <a href="#"><i data-feather="linkedin"></i></a>
+                            <a href="#"><i data-feather="twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Team Member 3 -->
+                <div class="team-member">
+                    <div class="team-member-img">
+                        <img src="./Images/HWD.jpg" alt="Head of Writer Development">
+                    </div>
+                    <div class="team-member-info">
+                        <h3>Odusote Oreluwa</h3>
+                        <p>Head of Writer Development</p>
+                        <div class="team-member-social">
+                            <a href="#"><i data-feather="linkedin"></i></a>
+                            <a href="#"><i data-feather="twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="values">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Core Values</h2>
+                <p>The principles that guide everything we do at Spectre Writing Inc.</p>
+            </div>
+            
+            <div class="values-grid">
+                <!-- Value 1 -->
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i data-feather="lock"></i>
+                    </div>
+                    <h3>Discretion</h3>
+                    <p>Your ideas and information remain completely confidential. We take privacy seriously.</p>
+                </div>
+                
+                <!-- Value 2 -->
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i data-feather="edit"></i>
+                    </div>
+                    <h3>Excellence</h3>
+                    <p>We deliver only the highest quality writing that meets professional publishing standards.</p>
+                </div>
+                
+                <!-- Value 3 -->
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i data-feather="user"></i>
+                    </div>
+                    <h3>Authenticity</h3>
+                    <p>We capture your unique voice and perspective, not impose our own.</p>
+                </div>
+                
+                <!-- Value 4 -->
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i data-feather="clock"></i>
+                    </div>
+                    <h3>Reliability</h3>
+                    <p>We meet deadlines and commitments, every time, without exception.</p>
+                </div>
+                
+                <!-- Value 5 -->
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i data-feather="heart"></i>
+                    </div>
+                    <h3>Passion</h3>
+                    <p>We love what we do and it shows in the quality of our work.</p>
+                </div>
+                
+                <!-- Value 6 -->
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i data-feather="refresh-cw"></i>
+                    </div>
+                    <h3>Adaptability</h3>
+                    <p>We tailor our approach to each client's specific needs and goals.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Work With Us?</h2>
+            <p>Discover how our ghostwriting services can help you share your ideas with the world.</p>
+            <a href="index.html#contact" class="btn-primary">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h3>Spectre<span>Writing Inc.</span></h3>
+                    <p>Connecting visionary leaders with elite writers to craft compelling content that moves markets.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="index.html#services">Book Ghostwriting</a></li>
+                            <li><a href="index.html#services">Thought Leadership</a></li>
+                            <li><a href="index.html#services">Website Content</a></li>
+                            <li><a href="index.html#services">Speech Writing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="index.html#process">Our Process</a></li>
+                            <li><a href="index.html#testimonials">Testimonials</a></li>
+                            <li><a href="index.html#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Connect</h4>
+                        <div class="footer-social">
+                            <a href="#"><i data-feather="twitter"></i></a>
+                            <a href="#"><i data-feather="linkedin"></i></a>
+                            <a href="#"><i data-feather="facebook"></i></a>
+                            <a href="#"><i data-feather="instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Spectre Writing Inc. All rights reserved.</p>
+                <div class="footer-links-bottom">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = 'black';
+                navLinks.style.padding = '20px';
+                navLinks.style.gap = '15px';
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+        
+        // Show desktop menu on larger screens
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.position = 'static';
+                navLinks.style.backgroundColor = 'transparent';
+                navLinks.style.padding = '0';
+                navLinks.style.gap = '0';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

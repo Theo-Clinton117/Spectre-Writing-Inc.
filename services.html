@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | Spectre Writing Inc.</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #000;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ccc;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+        
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .services-hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.8) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        
+        .services-hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .services-hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Services Main Section */
+        .services-main {
+            padding: 80px 0;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+        
+        .service-card-large {
+            background: #f8f9fa;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card-large:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .service-image {
+            height: 250px;
+            overflow: hidden;
+        }
+        
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .service-card-large:hover .service-image img {
+            transform: scale(1.05);
+        }
+        
+        .service-content {
+            padding: 30px;
+        }
+        
+        .service-content h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .service-content p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .service-features {
+            margin: 25px 0;
+        }
+        
+        .service-features h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #000;
+        }
+        
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .feature-list li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .feature-list i {
+            margin-right: 10px;
+            color: #555;
+            flex-shrink: 0;
+        }
+        
+        .service-cta {
+            margin-top: 30px;
+        }
+        
+        .btn-primary {
+            background: black;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary:hover {
+            background: #333;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 8px;
+            padding: 40px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        
+        .pricing-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .price {
+            font-size: 36px;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #000;
+        }
+        
+        .price span {
+            font-size: 16px;
+            color: #666;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 30px;
+        }
+        
+        .pricing-features li {
+            margin-bottom: 10px;
+            color: #666;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-number {
+            background: black;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .step p {
+            color: #666;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: gray;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* Footer */
+        footer {
+            background: black;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-brand {
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-brand span {
+            color: #ccc;
+        }
+        
+        .footer-brand p {
+            color: #999;
+            max-width: 300px;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-social {
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            color: #999;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        
+        .footer-social a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-bottom p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links-bottom {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links-bottom a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .footer-links-bottom a:hover {
+            color: white;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .services-hero h1 {
+                font-size: 52px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .service-card-large {
+                display: flex;
+                min-height: 350px;
+            }
+            
+            .service-image {
+                width: 45%;
+                height: auto;
+            }
+            
+            .service-content {
+                width: 55%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+            }
+            
+            .pricing-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .process-steps {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .footer-container {
+                flex-direction: row;
+            }
+            
+            .footer-brand {
+                width: 30%;
+                margin-bottom: 0;
+            }
+            
+            .footer-links {
+                width: 60%;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .footer-bottom p {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Spectre <span>Writing Inc.</span></div>
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="services.html" class="nav-link active">Services</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Services Hero Section -->
+    <section class="services-hero">
+        <div class="container">
+            <h1>Our Comprehensive Writing Services</h1>
+            <p>Expertly crafted content solutions tailored to your specific needs and goals.</p>
+        </div>
+    </section>
+
+    <!-- Services Main Section -->
+    <section class="services-main">
+        <div class="container">
+            <div class="section-header">
+                <h2>Premium Writing Services</h2>
+                <p>We offer a full spectrum of professional writing services to help you communicate your ideas effectively.</p>
+            </div>
+            
+            <!-- Book Ghostwriting Service -->
+            <div class="services-grid">
+                <div class="service-card-large">
+                    <div class="service-image">
+                        <img src="http://static.photos/books/1200x630/1" alt="Book Ghostwriting">
+                    </div>
+                    <div class="service-content">
+                        <h3>Book Ghostwriting</h3>
+                        <p>Transform your ideas into a compelling, professionally written book that captures your unique voice and vision.</p>
+                        
+                        <div class="service-features">
+                            <h4>What's Included:</h4>
+                            <ul class="feature-list">
+                                <li><i data-feather="check"></i> Comprehensive initial consultation</li>
+                                <li><i data-feather="check"></i> Professional manuscript development</li>
+                                <li><i data-feather="check"></i> Multiple rounds of revisions</li>
+                                <li><i data-feather="check"></i> Publication-ready formatting</li>
+                                <li><i data-feather="check"></i> Complete confidentiality</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-cta">
+                            <a href="contact.html" class="btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Thought Leadership Service -->
+                <div class="service-card-large">
+                    <div class="service-image">
+                        <img src="http://static.photos/office/1200x630/2" alt="Thought Leadership">
+                    </div>
+                    <div class="service-content">
+                        <h3>Thought Leadership</h3>
+                        <p>Establish yourself as an authority in your field with expertly crafted articles, white papers, and speeches.</p>
+                        
+                        <div class="service-features">
+                            <h4>What's Included:</h4>
+                            <ul class="feature-list">
+                                <li><i data-feather="check"></i> In-depth research on your industry</li>
+                                <li><i data-feather="check"></i> Strategic content planning</li>
+                                <li><i data-feather="check"></i> Engaging, authoritative writing</li>
+                                <li><i data-feather="check"></i> SEO optimization (when applicable)</li>
+                                <li><i data-feather="check"></i> Publication support</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-cta">
+                            <a href="contact.html" class="btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Website Content Service -->
+                <div class="service-card-large">
+                    <div class="service-image">
+                        <img src="http://static.photos/technology/1200x630/3" alt="Website Content">
+                    </div>
+                    <div class="service-content">
+                        <h3>Website Content</h3>
+                        <p>Engaging, conversion-focused copy that clearly communicates your value proposition and brand story.</p>
+                        
+                        <div class="service-features">
+                            <h4>What's Included:</h4>
+                            <ul class="feature-list">
+                                <li><i data-feather="check"></i> Comprehensive brand analysis</li>
+                                <li><i data-feather="check"></i> SEO-optimized content</li>
+                                <li><i data-feather="check"></i> Clear calls-to-action</li>
+                                <li><i data-feather="check"></i> Mobile-friendly formatting</li>
+                                <li><i data-feather="check"></i> Conversion rate optimization</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-cta">
+                            <a href="contact.html" class="btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Editing Service -->
+                <div class="service-card-large">
+                    <div class="service-image">
+                        <img src="http://static.photos/workspace/1200x630/4" alt="Professional Editing">
+                    </div>
+                    <div class="service-content">
+                        <h3>Professional Editing</h3>
+                        <p>Polish your existing content to perfection with our comprehensive editing services.</p>
+                        
+                        <div class="service-features">
+                            <h4>What's Included:</h4>
+                            <ul class="feature-list">
+                                <li><i data-feather="check"></i> Developmental editing</li>
+                                <li><i data-feather="check"></i> Line editing for clarity and flow</li>
+                                <li><i data-feather="check"></i> Copy editing for grammar and style</li>
+                                <li><i data-feather="check"></i> Proofreading for final polish</li>
+                                <li><i data-feather="check"></i> Track changes for easy review</li>
+                            </ul>
+                        </div>
+                        
+                        <div class="service-cta">
+                            <a href="contact.html" class="btn-primary">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="pricing">
+        <div class="container">
+            <div class="section-header">
+                <h2>Transparent Pricing</h2>
+                <p>Flexible pricing options to suit projects of all sizes and budgets.</p>
+            </div>
+            
+            <div class="pricing-grid">
+                <!-- Basic Package -->
+                <div class="pricing-card">
+                    <h3>Basic</h3>
+                    <div class="price">$2,500<span>/project</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 5,000 words</li>
+                        <li>1 round of revisions</li>
+                        <li>Basic research</li>
+                        <li>Standard turnaround</li>
+                        <li>Single content type</li>
+                    </ul>
+                    <a href="contact.html" class="btn-primary">Get Started</a>
+                </div>
+                
+                <!-- Professional Package -->
+                <div class="pricing-card">
+                    <h3>Professional</h3>
+                    <div class="price">$5,000<span>/project</span></div>
+                    <ul class="pricing-features">
+                        <li>Up to 15,000 words</li>
+                        <li>3 rounds of revisions</li>
+                        <li>In-depth research</li>
+                        <li>Priority turnaround</li>
+                        <li>Multiple content types</li>
+                    </ul>
+                    <a href="contact.html" class="btn-primary">Get Started</a>
+                </div>
+                
+                <!-- Premium Package -->
+                <div class="pricing-card">
+                    <h3>Premium</h3>
+                    <div class="price">$10,000+<span>/project</span></div>
+                    <ul class="pricing-features">
+                        <li>Unlimited words</li>
+                        <li>Unlimited revisions</li>
+                        <li>Comprehensive research</li>
+                        <li>Express turnaround</li>
+                        <li>Custom content solutions</li>
+                    </ul>
+                    <a href="contact.html" class="btn-primary">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Simple Process</h2>
+                <p>We make professional writing services accessible and stress-free.</p>
+            </div>
+            <div class="process-steps">
+                <!-- Step 1 -->
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Consultation</h3>
+                    <p>We discuss your project goals, timeline, and budget.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Writer Matching</h3>
+                    <p>We select the ideal writer from our network for your project.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Collaboration</h3>
+                    <p>Your writer develops content with your ongoing feedback.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Delivery</h3>
+                    <p>You receive polished, publication-ready content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Elevate Your Content?</h2>
+            <p>Schedule a free consultation to discuss your project with our team.</p>
+            <a href="contact.html" class="btn-primary">Book a Consultation</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h3>Spectre<span>Writing Inc.</span></h3>
+                    <p>Connecting visionary leaders with elite writers to craft compelling content that moves markets.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="services.html">Book Ghostwriting</a></li>
+                            <li><a href="services.html">Thought Leadership</a></li>
+                            <li><a href="services.html">Website Content</a></li>
+                            <li><a href="services.html">Professional Editing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="about.html">About Us</a></li>
+                            <li><a href="#process">Our Process</a></li>
+                            <li><a href="#testimonials">Testimonials</a></li>
+                            <li><a href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Connect</h4>
+                        <div class="footer-social">
+                            <a href="#"><i data-feather="twitter"></i></a>
+                            <a href="#"><i data-feather="linkedin"></i></a>
+                            <a href="#"><i data-feather="facebook"></i></a>
+                            <a href="#"><i data-feather="instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Spectre Writing Inc. All rights reserved.</p>
+                <div class="footer-links-bottom">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = 'black';
+                navLinks.style.padding = '20px';
+                navLinks.style.gap = '15px';
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+        
+        // Show desktop menu on larger screens
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.position = 'static';
+                navLinks.style.backgroundColor = 'transparent';
+                navLinks.style.padding = '0';
+                navLinks.style.gap = '0';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1094 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectre | Writing Inc.</title>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <style>
+        /* Base Styles */
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #000;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 15px 0;
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .logo span {
+            color: #ccc;
+        }
+        
+        .nav-links {
+            display: none;
+        }
+        
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            position: relative;
+            padding-bottom: 5px;
+        }
+        
+        .nav-link:hover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+        
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, rgba(0,0,0,0.9) 0%, rgba(50,50,50,0.8) 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 42px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .hero p {
+            font-size: 20px;
+            max-width: 800px;
+            margin: 0 auto 30px;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .btn-primary {
+            background: white;
+            color: black;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        
+        .btn-secondary {
+            border: 1px solid white;
+            padding: 12px 30px;
+            border-radius: 4px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #eee;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: black;
+        }
+        
+        /* About Section */
+        .about {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .about-content {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .about-image {
+            width: 100%;
+            margin-bottom: 30px;
+        }
+        
+        .about-image img {
+            width: 100%;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .about-text h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .about-text p {
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .about-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .stat-item {
+            display: flex;
+            align-items: center;
+            margin-right: 20px;
+        }
+        
+        .stat-item i {
+            margin-right: 10px;
+            color: #555;
+        }
+        
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .section-header {
+            margin-bottom: 60px;
+        }
+        
+        .section-header h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .section-header p {
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .service-icon {
+            background: black;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+        
+        .service-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .service-card p {
+            color: #666;
+        }
+        
+        /* Process Section */
+        .process {
+            padding: 80px 0;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .process-steps {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-number {
+            background: black;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-weight: 700;
+            font-size: 20px;
+        }
+        
+        .step h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .step p {
+            color: #666;
+        }
+        
+        /* Testimonials Section */
+        .testimonials {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .testimonial-card {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            text-align: left;
+        }
+        
+        .testimonial-card:hover {
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transform: translateY(-5px);
+        }
+        
+        .testimonial-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+        
+        .testimonial-name h4 {
+            font-weight: 700;
+            margin: 0;
+        }
+        
+        .testimonial-name p {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0 0;
+        }
+        
+        .testimonial-text {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+        
+        .testimonial-rating {
+            display: flex;
+        }
+        
+        .testimonial-rating i {
+            color: #ffc107;
+            margin-right: 2px;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 80px 0;
+            background: black;
+            color: white;
+            text-align: center;
+        }
+        
+        .cta h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .cta p {
+            font-size: 20px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+        
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background: #f8f9fa;
+            text-align: center;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            text-align: left;
+        }
+        
+        .faq-question {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        
+        .faq-question h3 {
+            font-size: 20px;
+            font-weight: 600;
+            margin: 0;
+        }
+        
+        .faq-answer {
+            color: #666;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+        }
+        
+        .contact-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .contact-info {
+            margin-bottom: 40px;
+        }
+        
+        .contact-info h2 {
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        
+        .contact-info p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .contact-detail {
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-detail i {
+            margin-right: 15px;
+            color: #555;
+        }
+        
+        .contact-form input,
+        .contact-form select,
+        .contact-form textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-family: inherit;
+        }
+        
+        .contact-form textarea {
+            height: 120px;
+        }
+        
+        .contact-form button {
+            background: black;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .contact-form button:hover {
+            background: #333;
+        }
+        
+        /* Footer */
+        footer {
+            background: black;
+            color: white;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-container {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .footer-brand {
+            margin-bottom: 40px;
+        }
+        
+        .footer-brand h3 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .footer-brand span {
+            color: #ccc;
+        }
+        
+        .footer-brand p {
+            color: #999;
+            max-width: 300px;
+        }
+        
+        .footer-links {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .footer-links h4 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-social {
+            margin-top: 20px;
+        }
+        
+        .footer-social a {
+            color: #999;
+            margin-right: 15px;
+            text-decoration: none;
+        }
+        
+        .footer-social a:hover {
+            color: white;
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            margin-top: 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .footer-bottom p {
+            color: #999;
+            margin-bottom: 20px;
+        }
+        
+        .footer-links-bottom {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-links-bottom a {
+            color: #999;
+            text-decoration: none;
+        }
+        
+        .footer-links-bottom a:hover {
+            color: white;
+        }
+        
+        /* Responsive Styles */
+        @media (min-width: 768px) {
+            .hero h1 {
+                font-size: 52px;
+            }
+            
+            .hero-buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .about-content {
+                flex-direction: row;
+                align-items: center;
+            }
+            
+            .about-image {
+                width: 50%;
+                margin-bottom: 0;
+                padding-right: 40px;
+            }
+            
+            .about-text {
+                width: 50%;
+            }
+            
+            .services-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .process-steps {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .testimonials-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .contact-container {
+                flex-direction: row;
+            }
+            
+            .contact-info {
+                width: 50%;
+                margin-bottom: 0;
+                padding-right: 40px;
+            }
+            
+            .contact-form {
+                width: 50%;
+            }
+            
+            .footer-container {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .footer-brand {
+                width: 30%;
+                margin-bottom: 0;
+            }
+            
+            .footer-links {
+                width: 60%;
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .footer-bottom {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+            
+            .footer-bottom p {
+                margin-bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container nav-container">
+            <div class="logo">Spectre <span>Writing Inc.</span></div>
+            <div class="nav-links">
+                <a href="home.html" class="nav-link">Home</a>
+                <a href="about.html" class="nav-link">About</a>
+                <a href="services.html" class="nav-link">Services</a>
+                <a href="contact.html" class="nav-link">Contact</a>
+            </div>
+            <button class="mobile-menu-btn">
+                <i data-feather="menu"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Expert Ghostwriting Services</h1>
+            <p>If you can "Dream It". We can "Create It"...</p>
+            <div class="hero-buttons">
+                <a href="#contact" class="btn-primary">Get Started</a>
+                <a href="#services" class="btn-secondary">Our Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="http://static.photos/workspace/1200x630/42" alt="Professional workspace">
+                </div>
+                <div class="about-text">
+                    <h2>About Spectre Writing Inc.</h2>
+                    <p>Founded in 2025, Spectre Writing Inc. is the premier ghostwriting agency for authors, executives, entrepreneurs, and thought leaders who want to share their ideas with the world.</p>
+                    <p>We've assembled a curated network of the industry's top writing talent to match each client with the perfect collaborator for their project.</p>
+                    <div class="about-stats">
+                        <div class="stat-item">
+                            <i data-feather="award"></i>
+                            <span>150+ Successful Projects</span>
+                        </div>
+                        <div class="stat-item">
+                            <i data-feather="users"></i>
+                            <span>50+ Expert Writers</span>
+                        </div>
+                        <div class="stat-item">
+                            <i data-feather="book"></i>
+                            <span>30+ Published Books</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Services</h2>
+                <p>Comprehensive writing solutions tailored to your specific needs and goals.</p>
+            </div>
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="book-open"></i>
+                    </div>
+                    <h3>Book Ghostwriting</h3>
+                    <p>From concept to publication, our writers will craft a compelling manuscript that captures your voice and vision.</p>
+                </div>
+                
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="file-text"></i>
+                    </div>
+                    <h3>Thought Leadership</h3>
+                    <p>Articles, white papers, and speeches that establish you as an authority in your field.</p>
+                </div>
+                
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i data-feather="globe"></i>
+                    </div>
+                    <h3>Website Content</h3>
+                    <p>Engaging copy that communicates your brand's value proposition and converts visitors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process">
+        <div class="container">
+            <div class="section-header">
+                <h2>How It Works</h2>
+                <p>Our streamlined process ensures a seamless collaboration from start to finish.</p>
+            </div>
+            <div class="process-steps">
+                <!-- Step 1 -->
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Consultation</h3>
+                    <p>We discuss your project goals, timeline, and budget.</p>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Writer Matching</h3>
+                    <p>We select the ideal writer from our network for your project.</p>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Collaboration</h3>
+                    <p>Your writer develops content with your ongoing feedback.</p>
+                </div>
+                
+                <!-- Step 4 -->
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Delivery</h3>
+                    <p>You receive polished, publication-ready content.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Client Testimonials</h2>
+                <p>Don't just take our word for it. Here's what our clients say.</p>
+            </div>
+            <div class="testimonials-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="http://static.photos/people/200x200/1" alt="Client" class="testimonial-avatar">
+                        <div class="testimonial-name">
+                            <h4>Theophilus O.</h4>
+                            <p>CEO, Tech Startup</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Spectre Writing Inc. was born from a dream to transform my rough ideas into a compelling book that's opens doors I never imagined."</p>
+                    <div class="testimonial-rating">
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="http://static.photos/people/200x200/2" alt="Client" class="testimonial-avatar">
+                        <div class="testimonial-name">
+                            <h4>Sarah L.</h4>
+                            <p>Executive Coach</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"The thought leadership articles they've written for me have significantly boosted my professional reputation."</p>
+                    <div class="testimonial-rating">
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-header">
+                        <img src="http://static.photos/people/200x200/3" alt="Client" class="testimonial-avatar">
+                        <div class="testimonial-name">
+                            <h4>David K.</h4>
+                            <p>Financial Advisor</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">"Working with their ghostwriter was like gaining a business partner who perfectly understood my voice."</p>
+                    <div class="testimonial-rating">
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                        <i data-feather="star"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Bring Your Ideas to Life?</h2>
+            <p>Schedule a free consultation to discuss your project with our team.</p>
+            <a href="#contact" class="btn-primary">Book a Consultation</a>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <div class="container">
+            <div class="section-header">
+                <h2>Frequently Asked Questions</h2>
+                <p>Answers to common questions about our ghostwriting services.</p>
+            </div>
+            <div class="faq-container">
+                <!-- FAQ 1 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How does the ghostwriting process work?</h3>
+                        <i data-feather="chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our process begins with an in-depth consultation to understand your goals. We then match you with a writer who conducts interviews and research to capture your voice. You'll receive drafts for feedback throughout the process until we deliver the final product.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 2 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What's the typical cost for ghostwriting services?</h3>
+                        <i data-feather="chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Costs vary based on project scope, length, and complexity. Book projects typically range from $25,000 to $100,000. We offer various pricing models including flat project fees, hourly rates, and retainer agreements.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 3 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Will my ghostwriter sign an NDA?</h3>
+                        <i data-feather="chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely. All our writers sign comprehensive NDAs before beginning any project. Your ideas and information remain completely confidential.</p>
+                    </div>
+                </div>
+                
+                <!-- FAQ 4 -->
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How long does a typical book project take?</h3>
+                        <i data-feather="chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Most book projects take 6-12 months from initial consultation to final manuscript. The timeline depends on the book's length, research required, and your availability for interviews and feedback.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h2>Get in Touch</h2>
+                    <p>Have questions about our services or ready to start your project? Fill out the form and we'll get back to you within 24 hours.</p>
+                    <div class="contact-details">
+                        <div class="contact-detail">
+                            <i data-feather="mail"></i>
+                            <span>spectrewriting879@gmail.com</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i data-feather="phone"></i>
+                            <span>+234 708-150-9669</span>
+                        </div>
+                        <div class="contact-detail">
+                            <i data-feather="map-pin"></i>
+                            <span>Ada-George, Port-Harcourt, Rivers State</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form action="mailto:spectrewriting879@gmail.com" method="post" enctype="text/plain">
+                        <input type="text" id="name" name="name" placeholder="Name" required>
+                        <input type="email" id="email" name="email" placeholder="Email" required>
+                        <select id="service" name="service" required>
+                            <option value="">Select a service</option>
+                            <option value="Book Ghostwriting">Book Ghostwriting</option>
+                            <option value="Thought Leadership">Thought Leadership</option>
+                            <option value="Website Content">Website Content</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <textarea id="message" name="message" placeholder="Message" required></textarea>
+                        <button type="submit">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-brand">
+                    <h3>Spectre<span>Writing Inc.</span></h3>
+                    <p>Connecting visionary leaders with elite writers to craft compelling content that moves markets.</p>
+                </div>
+                <div class="footer-links">
+                    <div>
+                        <h4>Services</h4>
+                        <ul>
+                            <li><a href="#">Book Ghostwriting</a></li>
+                            <li><a href="#">Thought Leadership</a></li>
+                            <li><a href="#">Website Content</a></li>
+                            <li><a href="#">Speech Writing</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Company</h4>
+                        <ul>
+                            <li><a href="#about">About Us</a></li>
+                            <li><a href="#process">Our Process</a></li>
+                            <li><a href="#testimonials">Testimonials</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4>Connect</h4>
+                        <div class="footer-social">
+                            <a href="#"><i data-feather="twitter"></i></a>
+                            <a href="#"><i data-feather="linkedin"></i></a>
+                            <a href="#"><i data-feather="facebook"></i></a>
+                            <a href="#"><i data-feather="instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 Spectre Writing Inc. All rights reserved.</p>
+                <div class="footer-links-bottom">
+                    <a href="#">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        feather.replace();
+        
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.parentElement.querySelector('.faq-answer');
+                const icon = question.querySelector('i');
+                
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                    icon.setAttribute('data-feather', 'chevron-down');
+                } else {
+                    answer.style.display = 'block';
+                    icon.setAttribute('data-feather', 'chevron-up');
+                }
+                feather.replace();
+            });
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('.mobile-menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            if (navLinks.style.display === 'flex') {
+                navLinks.style.display = 'none';
+            } else {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'column';
+                navLinks.style.position = 'absolute';
+                navLinks.style.top = '70px';
+                navLinks.style.left = '0';
+                navLinks.style.right = '0';
+                navLinks.style.backgroundColor = 'black';
+                navLinks.style.padding = '20px';
+                navLinks.style.gap = '15px';
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    navLinks.style.display = 'none';
+                }
+            });
+        });
+        
+        // Show desktop menu on larger screens
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                navLinks.style.display = 'flex';
+                navLinks.style.flexDirection = 'row';
+                navLinks.style.position = 'static';
+                navLinks.style.backgroundColor = 'transparent';
+                navLinks.style.padding = '0';
+                navLinks.style.gap = '0';
+            } else {
+                navLinks.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
